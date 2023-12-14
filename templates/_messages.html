@@ -1,0 +1,9 @@
+{% if messages %}
+{% for message in messages %}
+<div class="container" hx-get="{% url 'clear-alert'%}" hx-trigger="load delay:3s">
+  <div class="alert {{ message.tags }}" role="alert">
+    {{ message }}
+  </div>
+</div>
+{% endfor %}
+{% endif %}

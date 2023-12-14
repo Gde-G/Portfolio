@@ -1,0 +1,171 @@
+@use '../custom' as *;
+@use '../components/mixins' as *;
+@use '../components/animations' as *;
+
+
+.portfolio {
+    padding: 2rem 0;
+    @media (min-width:992px){
+        padding: 7rem 0;
+    }
+}
+
+.portfolio-box {
+    position: relative;
+    overflow: hidden;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    height: 15rem;
+    box-shadow: 1px 22px 30px -2px rgba($secondary, 0.40);
+    -webkit-box-shadow: 1px 22px 30px -2px rgba($secondary, 0.40);
+    -moz-box-shadow: 1px 22px 30px -2px rgba($secondary, 0.40);
+    text-align: center;
+    transition: all 1.5s ease-out;
+
+    img {
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+    }
+
+    .portfolio-info {
+        background-color: rgba($primary, 0.8);
+        color: $white;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: all .3s linear;
+
+        .category {
+            position: absolute;
+            top: 10%;
+            right: 0%;
+            transform: translate(-50%, -50%);
+            color: $gray-400;
+        }
+
+        .caption {
+            @include absoluteCenter;
+            text-align: center;
+            width: 90%;
+
+            p {
+                font-size: 0.8rem;
+            }
+        }
+
+        .project-link {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+
+            i {
+                color: $blue-dark;
+            }
+
+            &-staff {
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
+}
+
+.portfolio-box:hover {
+    transform: translate(.2rem, -.5rem);
+
+    .portfolio-info {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.project-img {
+
+    &-preview,
+    &-preview-portada {
+        width: 100%;
+        height: 15rem;
+        background: url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
+        background-color: #fff;
+        background-size: contain;
+        background-position: center center;
+        background-repeat: no-repeat;
+        display: inline-block;
+        box-shadow: 0px 3px 6px 2px rgba($primary, 0.5);
+
+
+    }
+
+    &-preview-portada {
+        width: 15rem;
+        height: 10rem;
+
+        @media (min-width: 576px) {
+            width: 30rem;
+            height: 20rem;
+        }
+    }
+
+
+    &-portada {
+        width: 15rem;
+        height: 10rem;
+        position: relative;
+        display: flex;
+
+        margin: 1rem auto;
+
+        @media (min-width: 576px) {
+            width: 30rem;
+            height: 20rem;
+        }
+
+        .upload-img {
+            width: 0px;
+            height: 0px;
+            overflow: hidden;
+        }
+
+        &-border {
+
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            border: 1px solid $secondary;
+            animation: pulse-border 1.5s linear infinite;
+            cursor: pointer;
+
+            @media (min-height: 576px) {
+                top: 40%;
+                left: 40%;
+                width: 5rem;
+                height: 5rem;
+            }
+        }
+
+        &-input {
+
+            color: $primary;
+            font-size: 1.5rem;
+
+            @media (min-height: 576px) {
+                font-size: 2.5rem;
+
+            }
+
+        }
+
+    }
+}
+.grecaptcha-badge {
+    visibility: hidden !important;
+}
+

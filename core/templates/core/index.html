@@ -1,0 +1,108 @@
+{% extends 'main.html'%}
+
+{% block content %}
+{% load static %}
+
+<!--  /////////////////////////////
+                INTRO
+          ///////////////////////////// -->
+<section id="home" class="intro-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Intro Content -->
+      <div class="col-md-6 intros">
+        <h1 class="display-2">
+          <span class="display-2--intro"> Hey! I'm Gde-G </span>
+          <span class="display-2--description lh-base">
+            This is my portfolio, you will find a showcase of my projects that highlight my abilities in full stack development and cloud technologies.
+            Each project represents a unique challenge that I embraced with enthusiasm and delivered successful outcomes.
+          </span>
+        </h1>
+        <div class="d-sm-flex justify-content-around">
+          <a href="#contact" class="rounded-pill btn-rounded cv-btn">
+            My CV
+            <span><i class="fas fa-arrow-right"></i></span>
+          </a>
+          <a href="#contact" class="rounded-pill btn-rounded-reverse cert-btn">
+            Certificates
+            <span><i class="fas fa-arrow-right"></i></span>
+          </a>
+        </div>
+      </div>
+      <!-- Video Content -->
+      <div class="d-none d-md-block col-md-6 intros text-end">
+        <div class="logo-box">
+          <div class="logo-border">
+            <div class="position-relative w-100 h-100">
+              <img src="{% static '/images/logo-gdg-big-text.png'%}" class="logo-logo" alt="Video illustration" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Ending wave -->
+  <svg id="wave" style="transform: rotate(0deg); transition: 0.3s" viewBox="0 0 1440 120" version="1.1"
+    xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
+        <stop stop-color="rgba(255, 255, 255, 1)" offset="0%"></stop>
+        <stop stop-color="rgba(255, 255, 255, 1)" offset="100%"></stop>
+      </linearGradient>
+    </defs>
+    <path style="transform: translate(0, 0); opacity: 1" fill="url(#sw-gradient-0)"
+      d="M0,60L80,50C160,40,320,20,480,10C640,0,800,0,960,14C1120,28,1280,56,1440,66C1600,76,1760,68,1920,64C2080,60,2240,60,2400,58C2560,56,2720,52,2880,50C3040,48,3200,48,3360,48C3520,48,3680,48,3840,56C4000,64,4160,80,4320,84C4480,88,4640,80,4800,68C4960,56,5120,40,5280,46C5440,52,5600,80,5760,92C5920,104,6080,100,6240,98C6400,96,6560,96,6720,88C6880,80,7040,64,7200,50C7360,36,7520,24,7680,24C7840,24,8000,36,8160,34C8320,32,8480,16,8640,22C8800,28,8960,56,9120,56C9280,56,9440,28,9600,16C9760,4,9920,8,10080,20C10240,32,10400,52,10560,52C10720,52,10880,32,11040,28C11200,24,11360,36,11440,42L11520,48L11520,120L11440,120C11360,120,11200,120,11040,120C10880,120,10720,120,10560,120C10400,120,10240,120,10080,120C9920,120,9760,120,9600,120C9440,120,9280,120,9120,120C8960,120,8800,120,8640,120C8480,120,8320,120,8160,120C8000,120,7840,120,7680,120C7520,120,7360,120,7200,120C7040,120,6880,120,6720,120C6560,120,6400,120,6240,120C6080,120,5920,120,5760,120C5600,120,5440,120,5280,120C5120,120,4960,120,4800,120C4640,120,4480,120,4320,120C4160,120,4000,120,3840,120C3680,120,3520,120,3360,120C3200,120,3040,120,2880,120C2720,120,2560,120,2400,120C2240,120,2080,120,1920,120C1760,120,1600,120,1440,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z">
+    </path>
+  </svg>
+</section>
+<!--  /////////////////////////////
+                TECHNOLOGIES
+          ///////////////////////////// -->
+<section id="techno" class="techno" hx-get="{% url 'get-technologies'%}" hx-trigger="load">
+  {% include 'sections/technologies.html' %}
+</section>
+{% if request.user.is_superuser %}
+<div id="create-tech" class="modal modal-blur fade" style="display: none" aria-hidden="false" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>
+{% endif %}
+<!--  ///////////////////////////// 
+                    PORTFOLIO
+        ///////////////////////////// -->
+<section id="portfolio" class="portfolio" hx-get="{% url 'get-portfolio'%}?{{parameters_url}}" hx-trigger="load">
+  {% include 'sections/portfolio.html' %}
+</section>
+<!--  ///////////////////////////// 
+                TESTIMONIALS
+          ///////////////////////////// -->
+<section id="testimonials" class="testimonials"  hx-get="{% url 'get-testimonials'%}" hx-trigger="load">
+  {% include 'sections/testimonials.html' %}
+</section>
+
+
+<div id="product-modal" class="modal modal-blur fade" style="display: none" aria-hidden="false" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>
+<!--  ///////////////////////////// 
+                    CONTACT
+        ///////////////////////////// -->
+<section id="contact" class="get-started mt-5 ">
+  {% include 'sections/contact.html'%}
+</section>
+
+<!--  ///////////////////////////// 
+                    FOOTER
+        ///////////////////////////// -->
+{% endblock content %}
+
+{% block scripts%}
+
+{% endblock scripts%}

@@ -1,0 +1,45 @@
+{% load static %}
+{% include '_messages.html' %}
+{% for project in projects %}
+<div class="col-lg-4 col-md-6">
+  <div class="portfolio-box">
+    <img src="{% get_media_prefix %}{{project.logo}}" alt="{{project.name}} logo" class="img-fluid">
+    <div class="portfolio-info">
+      <div class="category">{{project.category.name}}</div>
+      <div class="caption">
+        <h4 class="text-capitalize">
+          <a href="{{project.link}}" target="_blank" class="link-light text-decoration-none">
+            <i class="fa-solid fa-link ms-1 fs-5"></i>
+            {{project.name}}
+          </a>
+        </h4>
+        <p>{{project.description|truncatewords:30}}</p>
+      </div>
+      {% if request.user.is_staff %}
+      <div class="project-link-staff">
+        <a href="{% url 'edit-project' project.id %}" class="link-secondary text-decoration-none mx-2 fs-4"><i
+            class="fa-solid fa-pencil"></i></a>
+        <form hx-delete="{% url 'del-project' project.id %}"
+          hx-confirm="Are you sure to delete the Project, {{project.name}}" hx-target="#projects">
+          {% csrf_token %}
+          <button type="submit" class="btn link-danger border-0 fs-4 mx-2 p-0" style="cursor: pointer;">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </form>
+      </div>
+
+      {% endif %}
+      
+      <div class="project-link w-100">
+        <button hx-get="{% url 'project' project.slug %}" hx-trigger="click" hx-target="#product-modal" hx-swap="innerHTML"
+          data-bs-toggle="modal" data-bs-target="#product-modal" class="btn link-secondary fs-5">
+          View more details <i class="fa-solid fa-eye ms-1"></i>
+        </button>
+       
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endfor %}
+

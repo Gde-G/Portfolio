@@ -1,0 +1,26 @@
+{% load static %}
+<div class="container">
+  <div class="row text-center ">
+    <h1 class="display-3 fw-bold text-capitalize">Latest work</h1>
+    {% include '_messages.html' %}
+    <div class="heading-line"></div>
+
+  </div>
+  <!-- Filter buttons  -->
+  <div class="row text-center my-3 g-2">
+    <div class="col-md-12" id="categories">
+      {% include 'partials/categories.html' %}
+    </div>
+  </div>
+  <!--Portfolio items -->
+  {% if request.user.is_staff %}
+  <div class="row text-center mb-3">
+    <h3 class="display-5">Project</h3>
+    <a href="{% url 'add-project' %}" class="btn btn-secondary text-white"><i class="fa-solid fa-plus"></i>Add
+      New</a>
+  </div>
+  {% endif %}
+  <div class="row" id="projects">
+    {% include 'partials/projects.html' %}
+  </div>
+</div>

@@ -1,0 +1,93 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %} Add testimonial / Gde-G {% endblock title%}
+
+{% block content %}
+<section id="testimonials-add" class="testimonials-add">
+  <div class="container-fluid">
+    <div class="row text-center">
+      <h3 class="display-3 testimonials-add-headding">Agregar Testimonio</h3>
+    </div>
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% if page == 'update' %}
+      <div class="row text-center my-4">
+        <div class="col-12 col-md-5 text-center">
+          <h4 class="display-7">Foto Principal</h4>
+          <div class="testi-img-portada position-relative">
+            <div class="testi-img-preview-portada" style="background: url({%get_media_prefix%}{{testimonial.image}});">
+            </div>
+            <div class="testi-img-portada-border position-absolute top-50 start-50 translate-middle"></div>
+            <label class="testi-img-portada-input">
+
+              <i class="fa-solid fa-plus position-absolute top-50 start-50 translate-middle"></i>
+              <input type="file" name="image" id="id_image" class="upload-img" value="Upload Photo"
+                data-browse-on-zone-click="true">
+            </label>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 mx-0 mx-md-2 ">
+          <div class="mb-3">
+            <label for="id_name" class="form-label">Nombre Completo</label>
+            <input type="text" class="form-control" id="id_name" name="name" placeholder="Ingresar el nombre completo"
+              maxlength="100" value="{{testimonial.name}}" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="id_testimonial" class="form-label">Testimonio</label>
+            <textarea name="testimonial" id="id_testimonial" class="form-control" rows="5"
+              placeholder="Ingrese el testimonio" maxlength="400" required>{{testimonial.testimonial}}</textarea>
+          </div>
+        </div>
+      </div>
+      <div class="mb-5 d-flex justify-content-center">
+        <button type="submit" class="btn btn-secondary rounded-pill w-25 fw-bold p-2 text-white">
+          Confirmar
+        </button>
+      </div>
+      {% else %}
+      <div class="row text-center my-4">
+        <div class="col-12 col-md-5 text-center">
+          <h4 class="display-7">Foto Principal</h4>
+          <div class="testi-img-portada position-relative">
+            <div class="testi-img-preview-portada"></div>
+            <div class="testi-img-portada-border position-absolute top-50 start-50 translate-middle"></div>
+            <label class="testi-img-portada-input">
+
+              <i class="fa-solid fa-plus position-absolute top-50 start-50 translate-middle"></i>
+              <input type="file" name="image" id="id_image" class="upload-img" value="Upload Photo"
+                data-browse-on-zone-click="true">
+            </label>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 mx-0 mx-md-2 ">
+          <div class="mb-3">
+            <label for="id_name" class="form-label">Nombre Completo</label>
+            <input type="text" class="form-control" id="id_name" name="name" placeholder="Ingresar el nombre completo"
+              maxlength="100" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="id_testimonial" class="form-label">Testimonio</label>
+            <textarea name="testimonial" id="id_testimonial" class="form-control" rows="5"
+              placeholder="Ingrese el testimonio" maxlength="400" required></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="mb-5 d-flex justify-content-center">
+        <button type="submit" class="btn btn-secondary rounded-pill w-25 fw-bold p-2 text-white">
+          Confirmar
+        </button>
+      </div>
+      {% endif %}
+    </form>
+  </div>
+</section>
+{% endblock content%}
+
+{% block scripts%}
+<!-- Requieres Jquery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script src="{% static 'assets/js/add-img-preview.js'%}"></script>
+{% endblock scripts%}

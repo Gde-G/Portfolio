@@ -1,0 +1,35 @@
+{% if request.user.is_staff %}
+<h3 class="display-7">Categories</h3>
+<div class="d-flex justify-content-center mb-2">
+  <a href="{% url 'add-category' %}" class="link-secondary mx-2"><i class="fa-solid fa-plus"></i> Add New</a>
+
+</div>
+{% endif %}
+<div class="btn-group" role="group" aria-label="Filtering">
+  <a hx-get="{% url 'get-projects' %}" hx-trigger="click" hx-target="#projects" class="btn btn-outline-secondary mx-1 rounded-2">All</a>
+  {% for cate in categories %}
+    
+  <div class="d-block mx-1">
+    {% if forloop.counter|divisibleby:"2" %}
+    <a hx-get="{% url 'get-projects' %}?q={{ cate.name }}" hx-trigger="click" hx-target="#projects"
+      class="btn btn-outline-secondary mx-1 text-capitalize w-100">{{cate.name}}</a>
+    {% else %}
+    <a hx-get="{% url 'get-projects' %}?q={{ cate.name }}" hx-trigger="click" hx-target="#projects"
+      class="btn btn-outline-primary mx-1 text-capitalize w-100">{{cate.name}}</a>
+    {% endif %}
+    {% if request.user.is_staff %}
+    <div class="d-flex justify-content-center">
+      <a href="{% url 'edit-category' cate.id %}" class="link-secondary mx-2 fs-4"><i class="fa-solid fa-pencil"></i></a>
+      <form hx-delete="{% url 'del-category' cate.id %}" hx-confirm="Are you sure to delete he Category of {{cate.name}}"
+        hx-target="#categories">
+        {% csrf_token %}
+        <button type="submit" class="btn link-danger border-0 fs-4 mx-2 p-0" style="cursor: pointer;">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+      </form>
+    </div>
+    {% endif %}
+  </div>
+    
+  {% endfor %}
+</div>

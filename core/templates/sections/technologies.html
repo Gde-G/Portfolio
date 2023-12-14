@@ -1,0 +1,94 @@
+{% include '_messages.html' %}
+{% load static %}
+  <div class="container">
+    <div class="row text-center">
+      <h4 class="fw-bold lead mb-3">Technological knowledge</h4>
+      <div class="heading-line mb-3"></div>
+    </div>
+    {% if request.user.is_staff %}
+    <div class="row text-center">
+      <button hx-get="{% url 'technology-form'%}" hx-target="#create-tech" hx-trigger="click" hx-swap="innerHTML"
+        data-bs-toggle="modal" data-bs-target="#create-tech" 
+        class="btn btn-success w-50 mx-auto">
+        Add new
+      </button>
+    </div>
+    {% endif %}
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-6 col-md-3 position-relative">
+        <div class="technology__logo-box" id="tech-frontend" data-bs-toggle="tooltip" data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip" data-bs-title="Frontend technologies">
+          <img src="{% static 'images/techno/icon-UX-UI.png' %}" alt="Logo" class="img-fluid" />
+        </div>
+        <div class="row technology__logo-box_secondary hide" id="tech-frontend-box">
+          {% for tf in front_tech %}
+          <div class="col-4 mx-auto p-0">
+            <div class="technology__logo-box_secondary-box" data-bs-toggle="tooltip" data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip" data-bs-title="{{tf.name}}">
+              <img src="{% get_media_prefix %}{{ tf.logo }}" alt="{{tf.name}} logo" class="img-fluid" />
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+      </div>
+      <div class="col-6 col-md-3 position-relative">
+        <div class="technology__logo-box" id="tech-backend" data-bs-toggle="tooltip" data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip" data-bs-title="Backend technologies">
+          <img src="{% static 'images/techno/icon-backend.png' %}" alt="Logo" class="img-fluid" />
+
+        </div>
+        <div class="row technology__logo-box_secondary hide" id="tech-backend-box">
+          {% for bt in back_tech %}
+          <div class="col-4 mx-auto p-0">
+            <div class="technology__logo-box_secondary-box" data-bs-toggle="tooltip" data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip" data-bs-title="{{bt.name}}">
+              <img src="{% get_media_prefix %}{{ bt.logo }}" alt="{{bt.name}} Logo" class="img-fluid" />
+            </div>
+          </div>
+          {% endfor%}
+
+        </div>
+      </div>
+      <div class="col-6 col-md-3 position-relative">
+        <div class="technology__logo-box" id="tech-db" data-bs-toggle="tooltip" data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip" data-bs-title="Database technologies">
+          <img src="{% static 'images/techno/icon-db.png' %}" alt="Logo" class="img-fluid" />
+        </div>
+        <div class="row technology__logo-box_secondary hide" id="tech-db-box">
+          {% for dt in db_tech %}
+          <div class="col-4 mx-auto p-0">
+            <div class="technology__logo-box_secondary-box" data-bs-toggle="tooltip" data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip" data-bs-title="{{dt.name}}">
+              <img src="{% get_media_prefix %}{{ dt.logo }}" alt="{{dt.name}} Logo" class="img-fluid" />
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+      </div>
+      <div class="col-6 col-md-3 position-relative">
+        <div class="technology__logo-box" id="tech-cloud" data-bs-toggle="tooltip" data-bs-placement="top"
+          data-bs-custom-class="custom-tooltip" data-bs-title="Cloud technologies">
+          <img src="{% static 'images/techno/icon-cloud.png' %}" alt="Logo" class="img-fluid" />
+        </div>
+        <div class="row technology__logo-box_secondary hide" id="tech-cloud-box">
+          {% for ct in cloud_tech%}
+          <div class="col-4 mx-auto p-0">
+            <div class="technology__logo-box_secondary-box" data-bs-toggle="tooltip" data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip" data-bs-title="{{ct.name}}">
+              <img src="{% get_media_prefix %}{{ ct.logo }}" alt="{{ct.name}} Logo" class="img-fluid" />
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'assets/js/tech-show.js' %}"></script>
+  <script type="text/javascript">
+    var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+  </script>

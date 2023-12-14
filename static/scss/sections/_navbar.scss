@@ -1,0 +1,23 @@
+@use '../custom' as *;
+@use '../components/mixins' as *;
+
+nav.shadow{
+    box-shadow: 0.2rem 0.5rem 1rem rgba($cyan-light, 1.0) !important;
+}
+
+.menu{
+    @include gradient;
+    li{
+        padding: 0 .7rem;
+        a{
+            color: $white;
+            text-transform: capitalize;
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+        a:hover{
+            color: $cyan-light;
+            font-weight: 900;
+        }
+    }
+}

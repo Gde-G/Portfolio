@@ -1,0 +1,76 @@
+// Pulse border 
+
+
+@keyframes huerotate {
+    0% {
+        filter: grayscale(0%);
+        transform: scale(1) translate(-50%, -50%) rotate(0deg);
+    }
+    50% {
+        filter: grayscale(30%);
+        transform: scale(1.05) translate(-48%, -48%) rotate(0deg);
+    }
+    100% {
+        filter: grayscale(0%);
+        transform: scale(1) translate(-50%, -50%) rotate(0deg);
+    }
+
+}
+
+
+$s: 100% / 8;
+$t: 0.001%;
+
+@keyframes corner {
+    #{$s * 0} {
+        border-top-left-radius: 3% 50%;
+    }
+
+    #{$s * 1} {
+        border-top-left-radius: 50%;
+        border-top-right-radius: 50%;
+    }
+
+    #{$s * 2} {
+        border-top-right-radius: 3% 50%;
+    }
+
+    #{$s * 2 + $t} {
+        border-top-right-radius: 50% 3%;
+    }
+
+    #{$s * 3} {
+        border-top-right-radius: 50%;
+        border-bottom-right-radius: 50%;
+    }
+
+    #{$s * 4} {
+        border-bottom-right-radius: 50% 3%;
+    }
+
+    #{$s * 4 + $t} {
+        border-bottom-right-radius: 3% 50%;
+    }
+
+    #{$s * 5} {
+        border-bottom-right-radius: 50%;
+        border-bottom-left-radius: 50%;
+    }
+
+    #{$s * 6} {
+        border-bottom-left-radius: 3% 50%;
+    }
+
+    #{$s * 6 + $t} {
+        border-bottom-left-radius: 50% 3%;
+    }
+
+    #{$s * 7} {
+        border-bottom-left-radius: 50%;
+        border-top-left-radius: 50%;
+    }
+
+    #{$s * 8} {
+        border-top-left-radius: 50% 3%;
+    }
+}

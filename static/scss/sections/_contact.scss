@@ -1,0 +1,70 @@
+@use '../custom' as *;
+@use '../components/mixins' as *;
+
+.get-started {
+    padding: 3rem 0;
+    padding-top: 6.5rem;
+    background: rgb(244, 244, 244);
+    background: linear-gradient(180deg, rgba($white, 1)0%, rgba($gray-500, 1) 100%);
+}
+
+.cta-info {
+    @include gradient;
+    @include shadowContact;
+    padding: 3rem;
+    margin: 1rem 0;
+    height: 100%;
+
+    @include media-breakpoint-down(lg) {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    @include media-breakpoint-up(lg) {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    h4 {
+        text-align: center;
+    }
+
+    &__list {
+        position: relative;
+        list-style: none;
+        display: block;
+
+        li {
+            font-size: large;
+        }
+    }
+
+}
+
+.form {
+    @include shadowContact;
+    padding: 3rem;
+    margin: 1rem 0;
+    background-color: $white;
+    color: $black;
+    height: 100%;
+
+    h4 {
+        text-align: center;
+    }
+
+    *button {
+        border: none;
+        color: $white;
+    }
+
+    @include media-breakpoint-down(lg) {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    @include media-breakpoint-up(lg) {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+}

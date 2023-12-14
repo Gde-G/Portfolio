@@ -1,0 +1,19 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header text-center">
+      <h2 class="display-7 text-dark">Delete Project</h2>
+    </div>
+    <div class="modal-body text-dark">
+      Do you are sure do want to delete the project of {{project.name}}
+    </div>
+    <div class="modal-footer">
+      <form action="{% url 'del-project' project.id %}" method="post">
+        {% csrf_token %}
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="sumbit" class="btn btn-primary">Delete</button>
+      </form>
+    </div>
+
+  </div>
+
+</div>

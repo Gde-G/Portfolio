@@ -1,0 +1,30 @@
+{% include '_messages.html' %}
+<form hx-post="{% url 'consult'%}" class="row">
+  {% csrf_token %}
+  <div class="col-md-6 form-floating my-4">
+    <input type="text" placeholder="E.g. Michael" name="first_name" id="id_first_name" class="form-control shadow-lg" required>
+    <label for="id_first_name" class="ms-3">First Name</label>
+  </div>
+  <div class="col-md-6 form-floating my-4">
+    <input type="text" placeholder="E.g. Jordan" id="id_last_name" name="last_name" class="form-control shadow-lg" required>
+    <label for="id_last_name" class="ms-3">Last Name</label>
+  </div>
+  <div class="col-lg-12 form-floating mb-4">
+    <input type="email" placeholder="E.g. example@example.com" id="id_email" name="email" required
+      class="form-control shadow-lg">
+    <label for="id_email" class="ms-3">Email Address</label>
+  </div>
+  <div class="col-lg-12 form-floating mb-4">
+
+    <textarea name="msg" id="id_msg" style="height: 12rem;" class="form-control shadow-lg"
+      placeholder="Entrer the message that you want to send us!" required></textarea>
+    <label for="id_msg" class="ms-3">Message</label>
+  </div>
+  <div class="text-center d-grid mt-4">
+    {{form_consult.captcha}}
+    <button type="submit" class="btn btn-primary rounded-pill py-3">
+      Submit
+      <i class="fa-solid fa-paper-plane ms-3"></i>
+    </button>
+  </div>
+</form>

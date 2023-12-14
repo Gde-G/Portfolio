@@ -1,0 +1,139 @@
+
+{% load static %}
+
+<div class="modal-dialog modal-xl modal-dialog-centered modal-fullscreen-lg-down" role="document">
+  <div class="modal-content">    
+    <div class="modal-body p-0">
+      <div class="container-fluid project-each">
+        <div class="project-each-header">
+          <button type="button" class="btn-close btn-close-white btn-dismiss-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="logo-container">
+            <img src="{% get_media_prefix %}{{project.logo}}" alt="{{project.name}} Logo" class="project-each-logo">
+          </div>
+          <h3 class="display-5 text-center">
+            {{project.name}} 
+            <a href="{{project.link}}" class="link-light text-center fs-4 " target="_blank" 
+              data-bs-toggle="tooltip" data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip" data-bs-title="Open {{project.name}} site">
+              <i class="fa-solid fa-link ms-4"></i>
+            </a>
+          </h3>
+          
+        </div>
+        <div class="project-each-body">
+          <p class="project-each-body-description">{{project.description}}</p>
+          <div class="row text-center project-each-body-techno">
+            <h3 class="display-2--description ">Technologies being used</h3>
+            <div class="heading-line"></div>
+            <div class="col-6 col-md-3">
+              <h3 class="display-2--description fs-5 text-primary">Frontend</h3>
+              <div class="row text-center">
+                {% for front in front_tech%}
+                <div class="col-4 mx-auto p-0">
+                  <div class="project-each-body-techno-each" data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip" data-bs-title="{{front.name}}">
+                    <img src="{% get_media_prefix %}{{ front.logo }}" alt="{{front.name}} logo" class="img-fluid" />
+                  </div>
+                </div>
+                {% endfor %}
+              </div>              
+            </div>
+            <div class="col-6 col-md-3">
+              <h3 class="display-2--description fs-5 text-secondary">Backend</h3>
+              <div class="row text-center">
+                {% for back in back_tech%}
+                <div class="col-4 mx-auto p-0">
+                  <div class="project-each-body-techno-each" data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip" data-bs-title="{{back.name}}">
+                    <img src="{% get_media_prefix %}{{ back.logo }}" alt="{{back.name}} logo" class="img-fluid" />
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <h3 class="display-2--description fs-5 text-primary">Database</h3>
+              <div class="row text-center">
+                {% if db_tech %}
+                  {% for db in db_tech%}
+                <div class="col-4 mx-auto p-0">
+                  <div class="project-each-body-techno-each" data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip" data-bs-title="{{db.name}}">
+                    <img src="{% get_media_prefix %}{{ db.logo }}" alt="{{db.name}} logo" class="img-fluid" />
+                  </div>
+                </div>
+                  {% endfor %}
+                  {% if project.db_diagram %}
+                <div class="col-12 d-flex justify-content-between">
+                  <img src="{% get_media_prefix %}{{ project.db_diagram }}" alt="{{project.name}} DB diagram" class="project-each-body-db-diagram">
+                  <a href="{% get_media_prefix %}{{ project.db_diagram }}" target="_blank" class="link-secondary">Open Diagram <i class="fa-regular fa-paper-plane ms-1"></i></a>
+                </div>  
+                
+                  {% endif %}
+                {% else %}
+                <small class="text-danger">Has no Database</small>
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <h3 class="display-2--description fs-5 text-secondary">Cloud</h3>
+              <div class="row text-center">
+                {% for cloud in cloud_tech%}
+                <div class="col-4 mx-auto p-0">
+                  <div class="project-each-body-techno-each" data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip" data-bs-title="{{cloud.name}}">
+                    <img src="{% get_media_prefix %}{{ cloud.logo }}" alt="{{cloud.name}} logo" class="img-fluid" />
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="row text-center project-each-body-third">
+            <h3 class="display-2--description ">Third parties software</h3>
+            <div class="heading-line"></div>
+            {% if api_third %}
+            <div class="col-12 col-sm-4">
+              <h3 class="display-2--description fs-5 text-secondary">API'S</h3>
+              {% for at in api_third %}
+              <ul class="list-inline text-start d-flex justify-content-start">
+                <li class="list-inline-item text-secondary "><i class="fa-solid fa-circle-check"></i></li>
+                <li class="list-inline-item">{{at.name}}</li>
+              </ul>
+              {% endfor %}
+            </div>
+            {% endif%}
+            {% if library_third %}
+            <div class="col-12 col-sm-4">
+              <h3 class="display-2--description fs-5 text-primary">Libraries</h3>
+              {% for lt in library_third %}
+              <ul class="list-inline text-start d-flex justify-content-start">
+                <li class="list-inline-item text-primary "><i class="fa-solid fa-square-check"></i></li>
+                <li class="list-inline-item">{{lt.name}}</li>
+              </ul>
+              {% endfor %}
+            </div>
+            {% endif%}
+            {% if other_third %}
+            <div class="col-12 col-sm-4">
+              <h3 class="display-2--description fs-5 text-secondary">Others</h3>
+              {% for ot in other_third %}
+              <ul class="list-inline text-start d-flex justify-content-start">
+                <li class="list-inline-item text-secondary "><i class="fa-solid fa-check"></i></li>
+                <li class="list-inline-item">{{ot.name}}</li>
+              </ul>
+              {% endfor %}
+            </div>
+            {% endif%}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>

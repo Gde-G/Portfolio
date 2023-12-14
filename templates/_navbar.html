@@ -1,0 +1,45 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark menu shadow fixed-top">
+  <div class="container-xl container-fluid">
+    <a class="navbar-brand" href="{% url 'index' %}">
+      <img src="{% static '/images/logo-gdg.png' %}" class="my-0 w-75" alt="Logo gdg" />
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-around" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{% url 'index' %}#home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'index' %}#portfolio">Portfolio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'index' %}#testimonials">Testimonials</a>
+        </li>
+
+      </ul>
+      {% if request.user.is_staff %}
+      <div class="dropdown">
+        <button class="btn btn-rounded hide-down-lg rounded-pill dropdown-toggle" type="button"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          Hi, {{request.user}}!
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item text-dark" href="/admin">Admin panel</a></li>
+          <li><a class="dropdown-item text-dark" href="/admin/logout">Log out</a></li>
+        </ul>
+      </div>
+      {% else %}
+      <a href="#contact" class="rounded-pill btn-rounded">
+        Get in touch!
+        <span><i class="fa fa-arrow-down"></i></span>
+      </a>
+      
+      {% endif %}
+
+    </div>
+  </div>
+</nav>

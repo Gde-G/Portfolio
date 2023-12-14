@@ -1,0 +1,200 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block title %} Add Project /{% endblock title%}
+
+{% block content %}
+
+<div class="container" style="margin-top: 7rem;">
+  
+  <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% if page == 'update'%}
+    <div class="row text-center">
+      <h3 class="display-3">Edit Project</h3>
+      {% include '_messages.html' %}
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-5 text-center">
+        <h4 class="display-7">Logo of the Project</h4>
+        <div class="project-img-portada position-relative">
+          <div class="project-img-preview-portada" style="background: url({%get_media_prefix%}{{project.logo}}); background-size: cover; background-position: center center; background-repeat: no-repeat;">
+          </div>
+          <div class="project-img-portada-border position-absolute top-50 start-50 translate-middle"></div>
+          <label class="project-img-portada-input">
+
+            <i class="fa-solid fa-plus position-absolute top-50 start-50 translate-middle"></i>
+            <input type="file" name="logo" id="id_logo" class="upload-img" value="{{project.logo}}"
+              data-browse-on-zone-click="true"
+              hx-post="{% url 'preview-logo'%}" hx-target="#preview-logo" hx-trigger="input" hx-encoding="multipart/form-data" hx-swap="outerHTML">
+          </label>
+        </div>
+        <div class="mb-3 ms-md-3">
+          <label for="id_db_diagram" class="form-label">DB diagram</label>
+          <input type="file" class="form-control" name="db_diagram" id="id_db_diagram" value="{{project.db_diagram}}">
+          <small class="text-secondary">{{project.db_diagram}}</small>
+        </div>
+        <div class="mb-3 ms-md-3">
+          <label for="id_technologies">Tecnologias</label>
+          <select class="form-select" name="technologies" id="id_technologies" aria-label="Category Selector" multiple required>
+            <option selected disabled>Seleccione las tecnologias</option>
+            {% for tech in technologies %}
+            <option value="{{tech.id}}" {% if tech in project.technologies.all %} selected {% endif %}>{{tech.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 text-center ms-md-5">
+        <div class="mb-3 ms-md-3">
+          <label for="id_name" class="form-label">Name</label>
+          <input type="text" name="name" id="id_name" class="form-control" maxlength="150"
+            placeholder="Ingrese el Nombre del projecto" value="{{project.name}}" required>
+        </div>
+        <div class="mb-3 ms-md-3">
+          <label for="id_description" class="form-label">Description</label>
+          <textarea name="description" id="id_description" rows="5" class="form-control"
+            placeholder="Ingrese la descripcion del projecto" maxlength="1000"
+            required>{{project.description}}</textarea>
+        </div>
+        <div class="mb-3 ms-md-3">
+          <label for="id_conclusion" class="form-label">Conclusion</label>
+          <textarea name="conclusion" id="id_conclusion" rows="5" class="form-control"
+            placeholder="Ingrese la conclusion del projecto" maxlength="1000" required>{{project.conclusion}}</textarea>
+        </div>
+        
+        <div class="mb-3 ms-md-3">
+          <label for="id_link" class="form-label">Link</label>
+          <input type="url" name="link" id="id_link" class="form-control"
+            placeholder="Ingrese el link q direcciona al projecto" maxlength="200" pattern="https://.*"
+            value='{{project.link}}' required>
+        </div>
+        <div class="mb-3 ms-md-3">
+          <label for="id_category">Categoria</label>
+          <select class="form-select" name="category" id="id_category" aria-label="Category Selector" required>
+            <option selected value="{{project.category.id}}">{{project.category.name}}</option>
+            {% for cate in categories %}
+            <option value="{{cate.id}}">{{cate.name}}</option>
+            {% endfor %}
+
+          </select>
+        </div>
+      </div>
+      <div class="col-12 text-center">
+        <label for="id_third_parties">Software de terceros</label>
+        <div class="d-flex mb-3 ms-md-3">
+          
+          <select class="form-select rounded-end-0" name="third_parties" id="id_third_parties" aria-label="Third Parties Selector" multiple required>
+            {% for third in third_parties %}
+            <option value="{{third.id}}" {% if third in project.third_parties.all %} selected {% endif %}>{{third.name}}</option>
+            {% endfor %}
+          </select>
+          <a hx-get="{% url 'thirdparty-form' %}" hx-target="#create-third" hx-trigger="click" hx-swap="innerHTML"
+            data-bs-toggle="modal" data-bs-target="#create-third" 
+            class="btn btn-outline-success position-relative rounded-start-0">
+            <i class="fa-solid fa-plus position-absolute top-50 start-50 translate-middle"></i>
+          </a>
+        </div>
+      </div>
+      <div class="mt-2 mb-5 text-center">
+        <button type="submit" class="btn btn-primary text-white w-25">Confirmar</button>
+      </div>
+
+    </div>
+
+    {% else %}
+    <div class="row text-center">
+      <h3 class="display-3">Add Project</h3>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-5 text-center">
+        <h4 class="display-7">Foto Principal</h4>
+        <div class="project-img-portada position-relative mb-5">
+          <div class="project-img-preview-portada">
+          </div>
+          <div class="project-img-portada-border position-absolute top-50 start-50 translate-middle"></div>
+          <label class="project-img-portada-input">
+
+            <i class="fa-solid fa-plus position-absolute top-50 start-50 translate-middle"></i>
+            <input type="file" name="logo" id="id_logo" class="upload-img" value="Upload Photo"
+              data-browse-on-zone-click="true">
+          </label>
+        </div>
+        <div class="mb-3 ms-md-3">
+          <label for="id_db_diagram" class="form-label">DB diagram</label>
+          <input type="file" class="form-control" name="db_diagram" id="id_db_diagram">
+        </div>
+        <div class="mb-3 ms-md-3">
+          <label for="id_technologies">Tecnologias</label>
+          <select class="form-select" name="technologies" id="id_technologies" aria-label="Category Selector" multiple required>
+            <option selected disabled>Seleccione las tecnologias</option>
+            {% for tech in technologies %}
+            <option value="{{tech.id}}" >{{tech.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 text-center ms-md-5">
+        <div class="mb-3 ms-md-3">
+          <label for="id_name" class="form-label">Nombre</label>
+          <input type="text" name="name" id="id_name" class="form-control" maxlength="150"
+            placeholder="Ingrese el Nombre del projecto" required>
+        </div>
+        <div class="mb-3 ms-md-3">
+          <label for="id_description" class="form-label">Descripcion</label>
+          <textarea name="description" id="id_description" rows="5" class="form-control"
+            placeholder="Ingrese la descripcion del projecto" maxlength="1000" required></textarea>
+        </div>
+        <div class="mb-3 ms-md-3">
+          <label for="id_conclusion" class="form-label">Conclusion</label>
+          <textarea name="conclusion" id="id_conclusion" rows="5" class="form-control"
+            placeholder="Ingrese la descripcion del projecto" maxlength="1000" required></textarea>
+        </div>
+        
+        <div class="mb-3 ms-md-3">
+          <label for="id_link" class="form-label">Link</label>
+          <input type="url" name="link" id="id_link" class="form-control"
+            placeholder="Ingrese el link q direcciona al projecto" pattern="https://.*" maxlength="200" required>
+        </div>
+        <div class="mb-3 ms-md-3">
+          <label for="id_category">Categoria</label>
+          <select class="form-select" name="category" id="id_category" aria-label="Category Selector" required>
+            <option selected disabled>Seleccione la categoria a la que pertenece</option>
+            {% for cate in categories %}
+            <option value="{{cate.id}}">{{cate.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="mb-3 ms-md-3">
+        <label for="id_third_parties">Software de terceros</label>
+        <select class="form-select" name="third_parties" id="id_third_parties" aria-label="Third Parties Selector" multiple
+          required>
+          <option selected disabled>Seleccione los Software de terceros</option>
+          {% for third in third_parties %}
+          <option value="{{third.id}}">{{third.name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="mt-2 mb-5 text-center">
+        <button type="submit" class="btn btn-primary text-white w-25">Confirmar</button>
+      </div>
+
+    </div>
+
+    {% endif %}
+  </form>
+</div>
+<div id="create-third" class="modal modal-blur fade" style="display: none" aria-hidden="false" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block scripts%}
+<!-- Requieres Jquery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"
+  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script src="{% static 'assets/js/add-img-preview.js'%}"></script>
+{% endblock scripts%}

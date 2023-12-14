@@ -1,0 +1,98 @@
+{% load static %}
+<section id="services" class="services mt-5 ">
+  <div class="container my-3">
+    <div class="row text-center">
+      <h1 class="display-3 fw-bold">Our Services</h1>
+      <div class="heading-line mb-4"></div>
+    </div>
+
+    <!-- Description -->
+
+    <div class="d-none d-md-flex row py-2 mt-5">
+      <div class="col-md-6 border-right">
+        <div class="bg-white p-3">
+          <h2 class="fw-bold text-capitalize text-center">
+            Our services range from the initial design to deployment
+            anywhere anytime
+          </h2>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="bg-white p-4 text-start">
+          <p class="fw-light">
+            We offer a wide range of technologies to meet your specific needs.
+            We will communicate with you regularly and provide daily progress
+            reports to ensure that we are meeting your expectations.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Content -->
+  <div class="container">
+    <!-- Web Development content -->
+    <div class="row">
+      <div class="col-12 col-md-6 mt-0 mt-md-4 services">
+        <div class="services__content-primary">
+          <div class="icon d-block fa-solid fa-code"></div>
+          <h3 class="display-3--title-primary">Web Development</h3>
+          <p class="lh-lg text-decoration-none">
+            As a Full-Stack Web Developer, I bring a comprehensive skill set to the table,
+            encompassing both front-end and back-end technologies. My expertise allows me to
+            create end-to-end web solutions that are not only visually appealing but also 
+            functionally robust.
+          </p>
+
+        </div>
+      </div>
+      <div class="d-none d-md-block col-md-6 services text-end">
+        <div class="services__pic">
+          <img src="{% static 'images/services/web-development.png' %}" alt="web development illustration"
+            class="img-fluid" />
+        </div>
+      </div>
+    </div>
+    <!-- Cloud Hosting Content -->
+    <div class="row">
+      <div class="d-none d-md-block col-md-6 services text-start">
+        <div class="services__pic">
+          <img src="{% static 'images/services/cloud-hosting.png' %}" alt="Cloud hosting illustration"
+            class="img-fluid" />
+        </div>
+      </div>
+      <div class="col-12 col-md-6 mt-0 mt-md-4 services">
+        <div class="services__content-secondary">
+          <div class="icon d-block fa-solid fa-cloud-upload"></div>
+          <h3 class="display-3--title-secondary ms-2">Cloud Services</h3>
+          <p class="lh-lg text-decoration-none">
+            Whether you need cloud-based AWS solutions for web applications,
+            data storage, or scalable computing, I have the expertise to architect
+            and manage your AWS infrastructure effectively.
+          </p>
+
+        </div>
+      </div>
+    </div>
+    <!-- I Don't know content -->
+    <div class="row">
+      <div class="col-12 col-md-6 mt-0 mt-md-4 services">
+        <div class="services__content-primary">
+          <div class="icon d-block fa-solid fa-infinity"></div>
+          <h3 class="display-3--title-primary">REST API</h3>
+          <p class="lh-lg text-decoration-none">
+            REST API developer with a strong command of both Django Rest Framework and FastAPI.
+            My focus is on creating efficient, scalable, and highly functional APIs that power
+            modern web and mobile applications.
+          </p>
+
+        </div>
+      </div>
+      <div class="d-none d-md-block col-md-6 services text-end">
+        <div class="services__pic">
+          <img src="{% static 'images/services/dont-know.png' %}" alt="i dont know illustration" class="img-fluid" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

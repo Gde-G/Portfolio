@@ -1,0 +1,118 @@
+{% load static %}
+
+<!-- Starting wave -->
+<svg id="wave" style="transform: rotate(180deg); transition: 0.3s; z-index: 1001; margin-top: -5px;" viewBox="0 0 1440 120" version="1.1"
+  xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
+      <stop stop-color="rgba(46.27, 13.84, 3.424, 1)" offset="0%"></stop>
+      <stop stop-color="rgba(255, 179, 11, 1)" offset="100%"></stop>
+    </linearGradient>
+  </defs>
+  <path style="transform: translate(0, 0); opacity: 1" fill="url(#sw-gradient-0)"
+    d="M0,60L60,52C120,44,240,28,360,20C480,12,600,12,720,18C840,24,960,36,1080,52C1200,68,1320,88,1440,84C1560,80,1680,52,1800,44C1920,36,2040,48,2160,50C2280,52,2400,44,2520,46C2640,48,2760,60,2880,64C3000,68,3120,64,3240,60C3360,56,3480,52,3600,54C3720,56,3840,64,3960,68C4080,72,4200,72,4320,70C4440,68,4560,64,4680,64C4800,64,4920,68,5040,68C5160,68,5280,64,5400,54C5520,44,5640,28,5760,36C5880,44,6000,76,6120,82C6240,88,6360,68,6480,66C6600,64,6720,80,6840,86C6960,92,7080,88,7200,88C7320,88,7440,92,7560,92C7680,92,7800,88,7920,88C8040,88,8160,92,8280,92C8400,92,8520,88,8580,86L8640,84L8640,120L8580,120C8520,120,8400,120,8280,120C8160,120,8040,120,7920,120C7800,120,7680,120,7560,120C7440,120,7320,120,7200,120C7080,120,6960,120,6840,120C6720,120,6600,120,6480,120C6360,120,6240,120,6120,120C6000,120,5880,120,5760,120C5640,120,5520,120,5400,120C5280,120,5160,120,5040,120C4920,120,4800,120,4680,120C4560,120,4440,120,4320,120C4200,120,4080,120,3960,120C3840,120,3720,120,3600,120C3480,120,3360,120,3240,120C3120,120,3000,120,2880,120C2760,120,2640,120,2520,120C2400,120,2280,120,2160,120C2040,120,1920,120,1800,120C1680,120,1560,120,1440,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z">
+  </path>
+</svg>
+<div class="container">
+  <div class="row text-center div mt-3">
+    <h1 class="display-3 fw-bold">Testimonials</h1>
+    {% include '_messages.html' %}
+    <hr class="mx-auto my-0" style="width: 100px; height: 3px" />
+    <h6 class="lead pt-1">What our clients are saying</h6>
+  </div>
+  {% if request.user.is_staff %}
+  <div class="staff-btns text-center">
+    <a href="{% url 'testimonial-add' %}" class="btn btn-outline-secondary text-white">Add new</a>
+  </div>
+  {% endif %}
+  <div class="row text-center">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+      <button class="btn btn-outline-light fas fa-arrow-left-long mt-4 mb-2 mx-2" type="button"
+        data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      </button>
+      <button class="btn btn-outline-light fas fa-arrow-right-long mt-4 mb-2 mx-2" type="button"
+        data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      </button>
+  
+      <div class="carousel-inner">
+        {% for testi in testimonials %}
+          {% if forloop.counter == 1 %}
+        <div class="carousel-item active">
+          <div class="testimonials__card">
+            <p class="lh-lg">
+              <i class="fa-solid fa-quote-left"></i>
+              {{testi.testimonial}}
+              <i class="fa-solid fa-quote-right"></i>
+            </p>
+          </div>
+          <div class="testimonials__picture">
+            <img src="{% get_media_prefix %}{{testi.image}}" alt="client-{{i}} profile" class="img-fluid">
+          </div>
+          <div class="testimonials__name">
+            <h3>{{testi.name}}</h3>
+            <p class="fw-light">{{testi.rol}}</p>
+          </div>
+            {% if request.user.is_staff %}
+          <div class="testimonials__staff-btns">
+            <a href="{% url 'testimonial-edit' testi.id %}" class="text-white text-decoration-none fs-4 mx-2"><i
+                class="fa-solid fa-pencil me-2"></i>Editar</a>
+            <form hx-delete="{% url 'del-testimonial' testi.pk %}"
+              hx-confirm="Are you sure to delete he Testimonial of {{testi.name}}" hx-target="#testimonials">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-danger border-0 fs-4 mx-2" style="cursor: pointer;">
+                <i class="fa-solid fa-trash"></i>Eliminar
+              </button>
+            </form>
+          </div>
+            {% endif %}
+        </div>
+          {% else %}
+        <div class="carousel-item">
+          <div class="testimonials__card">
+            <p class="lh-lg">
+              <i class="fa-solid fa-quote-left"></i>
+              {{testi.testimonial}}
+              <i class="fa-solid fa-quote-right"></i>
+            </p>
+          </div>
+          <div class="testimonials__picture">
+            <img src="{% get_media_prefix %}{{testi.image}}" alt="client-{{i}} profile" class="img-fluid">
+          </div>
+          <div class="testimonials__name">
+            <h3>{{testi.name}}</h3>
+            <p class="fw-light">{{testi.rol}}</p>
+          </div>
+          {% if request.user.is_staff %}
+          <div class="testimonials__staff-btns">
+            <a href="{% url 'testimonial-edit' testi.id %}" class="text-white text-decoration-none fs-4 mx-2"><i
+                class="fa-solid fa-pencil me-2"></i>Editar</a>
+            <form hx-delete="{% url 'del-testimonial' testi.pk %}" hx-confirm="Are you sure to delete he Testimonial of {{testi.name}}"
+              hx-target="#testimonials">   
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-danger border-0 fs-4 mx-2" style="cursor: pointer;">
+                <i class="fa-solid fa-trash"></i>Eliminar
+              </button>
+            </form> 
+          </div>
+            {% endif %}
+        </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Ending wave -->
+<svg id="wave" style="transform: rotate(0deg); transition: 0.3s; margin-bottom: -5px;" viewBox="0 0 1440 120" version="1.1"
+  xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
+      <stop stop-color="rgba(46.27, 13.84, 3.424, 1)" offset="0%"></stop>
+      <stop stop-color="rgba(255, 179, 11, 1)" offset="100%"></stop>
+    </linearGradient>
+  </defs>
+  <path style="transform: translate(0, 0px); opacity: 1" fill="url(#sw-gradient-0)"
+    d="M0,60L60,52C120,44,240,28,360,20C480,12,600,12,720,18C840,24,960,36,1080,52C1200,68,1320,88,1440,84C1560,80,1680,52,1800,44C1920,36,2040,48,2160,50C2280,52,2400,44,2520,46C2640,48,2760,60,2880,64C3000,68,3120,64,3240,60C3360,56,3480,52,3600,54C3720,56,3840,64,3960,68C4080,72,4200,72,4320,70C4440,68,4560,64,4680,64C4800,64,4920,68,5040,68C5160,68,5280,64,5400,54C5520,44,5640,28,5760,36C5880,44,6000,76,6120,82C6240,88,6360,68,6480,66C6600,64,6720,80,6840,86C6960,92,7080,88,7200,88C7320,88,7440,92,7560,92C7680,92,7800,88,7920,88C8040,88,8160,92,8280,92C8400,92,8520,88,8580,86L8640,84L8640,120L8580,120C8520,120,8400,120,8280,120C8160,120,8040,120,7920,120C7800,120,7680,120,7560,120C7440,120,7320,120,7200,120C7080,120,6960,120,6840,120C6720,120,6600,120,6480,120C6360,120,6240,120,6120,120C6000,120,5880,120,5760,120C5640,120,5520,120,5400,120C5280,120,5160,120,5040,120C4920,120,4800,120,4680,120C4560,120,4440,120,4320,120C4200,120,4080,120,3960,120C3840,120,3720,120,3600,120C3480,120,3360,120,3240,120C3120,120,3000,120,2880,120C2760,120,2640,120,2520,120C2400,120,2280,120,2160,120C2040,120,1920,120,1800,120C1680,120,1560,120,1440,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z">
+  </path>
+</svg>
+

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Hey! I'm Gastón de Guernica. This is my portfolio, you will find a showcase of my projects that highlight my abilities in full stack development and cloud technologies.">
+  <title>{% block title %} {% endblock title %}Gde-G</title>
+  <link rel="stylesheet" href="{% static 'scss/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'scss/font-awesome.css' %}" />
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href=" {% static 'images/favicon/apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+  <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src=" {% static 'libs/bootstrap-5.3.0/dist/js/bootstrap.bundle.js'%}"></script>
+  <script src="{% static 'libs/htmx1.9.5.min.js' %}"></script>
+  
+  
+</head>
+
+<body>
+  {% include '_navbar.html' %}
+
+  
+  {% block content%}
+  {% endblock content%}
+  <!--  ///////////////////////////// 
+                      FOOTER
+          ///////////////////////////// -->
+
+  {% include '_footer.html' %}
+  
+  <script type="text/javascript">
+    document.body.addEventListener('htmx:configRequest', (event) => {
+      event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+    });
+  </script>
+  {% block scripts%}
+  {% endblock scripts%}
+
+</body>
+
+</html>
