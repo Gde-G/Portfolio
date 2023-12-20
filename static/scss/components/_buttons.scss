@@ -1,7 +1,6 @@
 @use '../custom' as *;
 @use '../components/mixins' as *;
 
-//Button Navbar
 .btn-rounded,
 .btn-rounded-reverse {
     width: auto;
@@ -68,16 +67,20 @@
     }
 }
 
-.btn-rounded-reverse:hover {
-    @include gradient-reverse;
-    color: $white;
-    border: 0.1rem solid $blue-light ;
+.btn-rounded-reverse{
+    color: $secondary;
+    text-decoration: underline solid $secondary;
+    &:hover {
+        @include gradient-reverse;
+        color: $white;
+        text-decoration: underline solid $white;
+        border: 0.1rem solid $blue-light ;
 
-    span {
-        background-color: $white;
-
-        i {
-            color: $secondary;
+        span {
+            background-color: $white;
+            i {
+                color: $secondary;
+            }
         }
     }
 }

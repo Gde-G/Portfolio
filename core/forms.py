@@ -1,5 +1,5 @@
 from django import forms
-from .models import Technology, ThirdParty, Testimonial, Category, Project, Consult
+from .models import Technology, ThirdParty, Testimonial, Category, Project, Consult, Certificate
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV3
 
@@ -45,3 +45,11 @@ class ConsultForm(forms.ModelForm):
     class Meta:
         model = Consult
         fields = ['first_name', 'last_name', 'email', 'msg']
+
+
+class CertificateForm(forms.ModelForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV3())
+
+    class Meta:
+        model = Certificate
+        fields = ['title', 'link', 'image']

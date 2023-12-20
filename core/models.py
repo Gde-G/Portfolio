@@ -113,3 +113,16 @@ class Consult(models.Model):
 
     class Meta:
         ordering = ['-update_at', '-created_at']
+
+
+class Certificate(models.Model):
+    title = models.CharField(max_length=150)
+    image = models.ImageField(upload_to="images/certificates/")
+    link = models.URLField(null=True, blank=True)
+
+    class Meta:
+        verbose_name = "Certificate"
+        verbose_name_plural = "Certificates"
+
+    def __str__(self):
+        return self.title

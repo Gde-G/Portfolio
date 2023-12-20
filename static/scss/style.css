@@ -11806,9 +11806,16 @@ textarea.form-control-lg {
   color: #0091aa;
 }
 
+.btn-rounded-reverse {
+  color: #00245a;
+  -webkit-text-decoration: underline solid #00245a;
+          text-decoration: underline solid #00245a;
+}
 .btn-rounded-reverse:hover {
   background: linear-gradient(to right, rgba(0, 36, 90, 0.95), rgba(0, 145, 170, 0.95));
   color: #fff;
+  -webkit-text-decoration: underline solid #fff;
+          text-decoration: underline solid #fff;
   border: 0.1rem solid #1a6be4;
 }
 .btn-rounded-reverse:hover span {
@@ -12618,4 +12625,48 @@ nav.shadow {
   margin-top: 7rem;
   z-index: 2rem;
   height: auto;
+}
+
+.certificates {
+  color: #fff;
+  width: 100%;
+  padding: 0rem !important;
+  border-top-left-radius: 6.5px;
+  border-top-right-radius: 6.5px;
+}
+.certificates-header {
+  color: #fff;
+  position: relative;
+  width: 100%;
+  background: linear-gradient(to right, rgba(0, 145, 170, 0.95), rgba(0, 36, 90, 0.95));
+  border-top-left-radius: 6.5px;
+  border-top-right-radius: 6.5px;
+  padding: 1rem;
+}
+.certificates-header .btn-dismiss-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+.certificates .card {
+  background: linear-gradient(to right, rgba(0, 145, 170, 0.95), rgba(0, 36, 90, 0.95));
+  height: 290px;
+}
+@media (min-width: 332px) {
+  .certificates .card {
+    height: 340px;
+  }
+}
+@media (min-width: 400px) {
+  .certificates .card {
+    height: 435px;
+  }
+}
+@media (min-width: 575px) {
+  .certificates .card {
+    height: 290px;
+  }
+}
+.certificates .card.reverse {
+  background: linear-gradient(to right, rgba(0, 36, 90, 0.95), rgba(0, 145, 170, 0.95));
 }/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,57 @@
+{% load static %}
+{% include '_messages.html' %}
+<div class="modal-dialog modal-xl modal-dialog-centered modal-fullscreen-lg-down" role="document">
+  <div class="modal-content">
+    <div class="modal-body p-0">
+      <div class="container-fluid certificates">
+        <div class="certificates-header">
+          <button type="button" class="btn-close btn-close-white btn-dismiss-modal" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+          <h3 class="display-5 text-center">
+            Certificates
+          </h3>
+        </div>
+        <div class="certificates-body">
+          {% if request.user.is_staff %}
+          <form hx-post="{% url 'create-certificate' %}" hx-trigger="submit" hx-target="#certificates" hx-encoding="multipart/form-data" hx-swap="outerHTML">
+            {% csrf_token %}
+            {{form.captcha}}
+            <div class="row text-center mt-3 p-0 w-100 mx-auto">
+              <div class="col-9 p-0"> 
+                <div class="form-floating mb-3 mx-auto">
+                  <input type="text" class="form-control" id="id_title" name="title" required>
+                  <label for="id_title" class="text-dark">Certificate title</label>
+                </div>
+                <div class="form-floating mb-3 mx-auto">
+                  <input type="url" class="form-control" id="id_link" name="link">
+                  <label for="id_link" class="text-dark">URL</label>
+                </div>
+                <div class="mb-3">
+                  <label for="id_image" class="form-label text-dark">Image</label>
+                  <input class="form-control" type="file" id="id_image" name="image" required>
+                </div>
+              </div>
+              <div class="col-3 p-0">
+                <div class="row text-center mb-3">
+                  <button type="submit" class="btn btn-success w-50 mx-auto">Add Certificate</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <hr>
+          <hr>
+          {% endif %}
+          <div class="row row-cols-1 row-cols-sm-3 row-cols-lg-4 g-4 text-center m-2 mx-auto justify-content-center" id="certificates">
+            {% include 'core/certificates.html' %}
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+</script>

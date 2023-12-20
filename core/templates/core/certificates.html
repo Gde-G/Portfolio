@@ -1,0 +1,18 @@
+{% load static %}
+{% include '_messages.html' %}
+{% for cert in certificates %}
+<div class="col">
+  <a href="{% if cert.link %}{{cert.link}}{% else %} {% get_media_prefix %}{{ cert.image }} {% endif %}" target="_blank" class="text-decoration-none">
+    {% if forloop.counter|divisibleby:"2" %}
+    <div class="card">
+    {% else %}
+    <div class="card reverse">
+    {% endif %}
+      <img src="{% get_media_prefix %}{{ cert.image }}" class="card-img-top" alt="{{ cert.title }}">
+      <div class="card-body text-center text-light">
+        <h5 class="card-title">{{ cert.title }}</h5>
+      </div>
+    </div>
+  </a>
+</div>
+{% endfor %}

@@ -23,10 +23,12 @@
             My CV
             <span><i class="fas fa-arrow-right"></i></span>
           </a>
-          <a href="#contact" class="rounded-pill btn-rounded-reverse cert-btn">
+          <button hx-get="{% url 'get-certificates' %}" hx-trigger="click" hx-target="#certificates-modal" hx-swap="innerHTML"
+            data-bs-toggle="modal" data-bs-target="#certificates-modal"
+            class="rounded-pill btn-rounded-reverse cert-btn">
             Certificates
             <span><i class="fas fa-arrow-right"></i></span>
-          </a>
+          </button>
         </div>
       </div>
       <!-- Video Content -->
@@ -55,6 +57,13 @@
     </path>
   </svg>
 </section>
+<div id="certificates-modal" class="modal modal-blur fade" style="display: none" aria-hidden="false" tabindex="-1">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>
 <!--  /////////////////////////////
                 TECHNOLOGIES
           ///////////////////////////// -->
@@ -76,14 +85,6 @@
 <section id="portfolio" class="portfolio" hx-get="{% url 'get-portfolio'%}?{{parameters_url}}" hx-trigger="load">
   {% include 'sections/portfolio.html' %}
 </section>
-<!--  ///////////////////////////// 
-                TESTIMONIALS
-          ///////////////////////////// -->
-<section id="testimonials" class="testimonials"  hx-get="{% url 'get-testimonials'%}" hx-trigger="load">
-  {% include 'sections/testimonials.html' %}
-</section>
-
-
 <div id="product-modal" class="modal modal-blur fade" style="display: none" aria-hidden="false" tabindex="-1">
   <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -91,6 +92,12 @@
     </div>
   </div>
 </div>
+<!--  ///////////////////////////// 
+                TESTIMONIALS
+          ///////////////////////////// -->
+<section id="testimonials" class="testimonials"  hx-get="{% url 'get-testimonials'%}" hx-trigger="load">
+  {% include 'sections/testimonials.html' %}
+</section>
 <!--  ///////////////////////////// 
                     CONTACT
         ///////////////////////////// -->

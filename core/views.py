@@ -8,17 +8,21 @@ from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 
-from .forms import TechnologyForm, ThirdPartyForm, TestimonialForm, CategoryForm, ProjectForm, ConsultForm
-from .models import Testimonial, Category, Project, Technology, ThirdParty
+from .forms import (
+    TechnologyForm, ThirdPartyForm, TestimonialForm,
+    CategoryForm, ProjectForm, ConsultForm, CertificateForm
+)
+from .models import Testimonial, Category, Project, Technology, ThirdParty, Certificate
 import base64
 from django.core.files.base import ContentFile
 from django.core.files.uploadedfile import InMemoryUploadedFile
+
 
 def index(request: HttpRequest):
     form_consult = ConsultForm()
     get_copy = request.GET.copy()
 
-    parameters_url =  get_copy.urlencode()
+    parameters_url = get_copy.urlencode()
 
     context = {
         'form_consult': form_consult,
@@ -27,7 +31,7 @@ def index(request: HttpRequest):
 
     return render(request, 'core/index.html', context=context)
 
-#Reusable
+
 @staff_member_required
 @require_http_methods(['POST'])
 def load_preview_logo(request: HttpRequest):
@@ -43,7 +47,9 @@ def load_preview_logo(request: HttpRequest):
 def clear_alert(request: HttpRequest):
     return HttpResponse('')
 
-#Technologies
+# Technology
+
+
 @staff_member_required
 @require_http_methods(['GET'])
 def technology_form(request: HttpRequest):
@@ -52,25 +58,25 @@ def technology_form(request: HttpRequest):
     context = {
         'types': types
     }
- 
+
     return render(request, 'partials/technology-form.html', context=context)
 
 
 @staff_member_required
 @require_http_methods(['POST'])
 def create_technology(request: HttpRequest):
-    
+
     form = TechnologyForm(request.POST, request.FILES)
 
     if form.is_valid():
         techno = form.save()
-        messages.success(request, f'{techno.name} has been created successfully!') 
-        
+        messages.success(
+            request, f'{techno.name} has been created successfully!')
+
     else:
         for field, error in form.errors.as_data().items():
             messages.error(request, f'{field}. {error[0].messages[0]}')
     return redirect('get-technologies')
-    
 
 
 @require_http_methods(['GET'])
@@ -96,28 +102,31 @@ def get_technologies(request: HttpRequest):
     }
     return render(request, 'sections/technologies.html', context=context)
 
+# Third party
 
-#Third Party
+
 @staff_member_required
 @require_http_methods(['GET'])
 def thirdparty_form(request: HttpRequest):
     context = {
         'kind_choices': ThirdParty.kind_choices
     }
-    return render(request, 'partials/thirdparties-form.html', context= context)
+    return render(request, 'partials/thirdparties-form.html', context=context)
 
 
 @staff_member_required
 @require_http_methods(['POST'])
-def create_thirdparty(request:HttpRequest):
+def create_thirdparty(request: HttpRequest):
     form = ThirdPartyForm(request.POST)
     if form.is_valid():
         thrid_party = form.save()
         return HttpResponse(f"<option value='{thrid_party.id}' selected>{thrid_party.name}</option>")
     else:
         return HttpResponse()
-    
-# CUD Tesitimonial
+
+# Testimonials
+
+
 @staff_member_required
 def create_testimonial(request: HttpRequest):
     formTesti = TestimonialForm()
@@ -138,7 +147,7 @@ def create_testimonial(request: HttpRequest):
 @require_http_methods(['GET'])
 def get_testimonials(request: HttpRequest):
     testimonials = Testimonial.objects.all()
-    context ={
+    context = {
         'testimonials': testimonials,
     }
     return render(request, 'sections/testimonials.html', context=context)
@@ -170,7 +179,7 @@ def update_testimonial(request: HttpRequest, pk):
 def delete_testimonial(request: HttpRequest, pk):
     testi = Testimonial.objects.get(id=int(pk))
     testimonials = Testimonial.objects.all()
-    
+
     name = testi.name
     testi.delete()
     messages.success(request, f'The Testimonial {name} be deleated!')
@@ -179,7 +188,7 @@ def delete_testimonial(request: HttpRequest, pk):
     }
     return render(request, 'sections/testimonials.html', context=context)
 
-# CUD Categories
+# Category
 
 
 @staff_member_required
@@ -227,7 +236,9 @@ def delete_category(request: HttpRequest, pk):
     categories = Category.objects.all()
     return render(request, 'partials/categories.html', {'categories': categories})
 
-# CUD Projects
+# Projects
+
+
 @require_http_methods(['GET'])
 def get_portfolio(request: HttpRequest):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
@@ -305,7 +316,7 @@ def get_project(request: HttpRequest, slug):
         'api_third': api_third,
         'library_third': library_third,
         'other_third': other_third
-        }
+    }
     return render(request, 'core/project.html', context=context)
 
 
@@ -317,7 +328,7 @@ def update_project(request: HttpRequest, pk):
     technologies = Technology.objects.all()
     third_parties = ThirdParty.objects.all()
     categories = Category.objects.all()
-    
+
     if request.method == 'POST':
         formProj = ProjectForm(request.POST, request.FILES, instance=project)
 
@@ -355,9 +366,12 @@ def delete_project(request: HttpRequest, pk):
 
     return render(request, 'partials/projects.html', {'projects': projects})
 
+# Consult
+
+
 @require_http_methods(['POST'])
 def consult(request: HttpRequest):
-    
+
     formConsu = ConsultForm(request.POST)
 
     if formConsu.is_valid():
@@ -392,7 +406,7 @@ def consult(request: HttpRequest):
         except:
             messages.error(
                 request, 'The consultation was NOT sent due to an error. Please try again later!')
-        
+
     else:
         for field, errors in formConsu.errors.as_data().items():
             if field == "captcha" and errors[0] == 'This field is required.':
@@ -401,3 +415,30 @@ def consult(request: HttpRequest):
             messages.error(request, f"ERROR: {field}, {errors[0].messages[0]}")
 
     return render(request, 'partials/contact-form.html')
+
+# Certificates
+
+
+@require_http_methods(['GET'])
+def get_certificates(request: HttpRequest):
+    certificates = Certificate.objects.all()
+    form = CertificateForm()
+    return render(
+        request, 'partials/certificates-modal.html',
+        context={'certificates': certificates, 'form': form}
+    )
+
+
+@require_http_methods(['POST'])
+@staff_member_required
+def create_certificate(request: HttpRequest):
+    certificates = Certificate.objects.all()
+    form = CertificateForm(request.POST, request.FILES)
+
+    if form.is_valid():
+        certificate = form.save()
+    else:
+        for f, e in form.errors.as_data().items():
+            messages.error(request, f'{f}, {e[0].messages}')
+
+    return render(request, 'core/certificates.html', context={'certificates': certificates})

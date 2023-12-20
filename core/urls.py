@@ -8,7 +8,7 @@ urlpatterns = [
     path('#techno/', views.get_technologies, name='get-technologies'),
     path('#testimonials/', views.get_testimonials, name='get-testimonials'),
     path('#portfolio', views.get_portfolio, name='get-portfolio'),
-    
+
     path('testimonial/', views.create_testimonial, name='testimonial-add'),
     path('testimonial/<str:pk>', views.update_testimonial, name='testimonial-edit'),
     path('del-testimonial/<str:pk>',
@@ -23,9 +23,9 @@ urlpatterns = [
     path('edit-project/<str:pk>', views.update_project, name='edit-project'),
     path('del-project/<str:pk>', views.delete_project, name='del-project'),
 
-    
 
-    
+
+
 ]
 
 htmx_urlpatterns = [
@@ -38,10 +38,14 @@ htmx_urlpatterns = [
 
     path('thirdparty-form/', views.thirdparty_form, name='thirdparty-form'),
     path('add-thirdparty/', views.create_thirdparty, name='add-thirdparty'),
-   
+
     path('get-projects/', views.get_projects, name='get-projects'),
-    
+
     path("consult/", views.consult, name='consult'),
+
+    path('get-certificates/', views.get_certificates, name='get-certificates'),
+    path('create-certificate/', views.create_certificate,
+         name='create-certificate'),
 ]
 
 urlpatterns += htmx_urlpatterns
