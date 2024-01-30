@@ -19,7 +19,27 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'index' %}#testimonials">Testimonials</a>
         </li>
-
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'index' %}#contact">Get On Touch</a>
+        </li>
+      </ul>
+      <ul class="row text-center list-unstyled">
+        <li class="col-4 ">
+          <a class="nav-link nav-flag-cont" aria-current="page" href="{% url 'index' %}#home">
+            <img src="{% static 'images/icons/argentina.png'%}" class="nav-flag" alt="" srcset="">
+          </a>
+        </li>
+        <li class="col-4 ">
+          <a class="nav-link nav-flag-cont" href="{% url 'index' %}#portfolio">
+            <img src="{% static 'images/icons/brazil.png'%}" class="nav-flag" alt="" srcset="">
+          </a>
+        </li>
+        <li class="col-4 ">
+          <a class="nav-link nav-flag-cont" href="{% url 'index' %}#testimonials">
+            <img src="{% static 'images/icons/united-states.png'%}" class="nav-flag" alt="" srcset="">
+          </a>
+        </li>
+      
       </ul>
       {% if request.user.is_staff %}
       <div class="dropdown">
@@ -32,12 +52,6 @@
           <li><a class="dropdown-item text-dark" href="/admin/logout">Log out</a></li>
         </ul>
       </div>
-      {% else %}
-      <a href="#contact" class="rounded-pill btn-rounded">
-        Get in touch!
-        <span><i class="fa fa-arrow-down"></i></span>
-      </a>
-      
       {% endif %}
 
     </div>
