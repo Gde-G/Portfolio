@@ -183,10 +183,10 @@ STATIC_URL = f'{AWS_S3_CUSTOM_DOMAIN}/static/'
 STORAGES = {
 	#Media files management
 	"default": {
-		"BACKEND": "portfolio.MediaStorage"
+		"BACKEND": "portfolio.storage_backends.MediaStorage"
 	},
 	# Staticfiles
 	"staticfiles":{
-		"BACKEND": "portfolio.StaticStorage"
+		"BACKEND": "portfolio.storage_backends.StaticStorage"
 	},
 }
