@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
 
-    'captcha'
+    'captcha',
+    'storages'
+
 ]
 
 MIDDLEWARE = [
@@ -166,3 +168,23 @@ EMAIL_USE_TLS = bool(int(os.environ.get('EMAIL_USE_TLS')))
 # Capthca conf
 RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
+
+
+# AWS Configuration
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+AWS_S3_FILE_OVERWRITE = bool(int(os.environ.get('AWS_S3_FILE_OVERWRITE')))
+
+STORAGES = {
+	#Media files management
+	"default": {
+		"BACKEND": "storages.backends.s3boto3.S3StaticStorage"
+	},
+	# Staticfiles
+	"staticfiles":{
+		"BACKEND": "storages.backends.s3boto3.S3StaticStorage"
+	},
+}
