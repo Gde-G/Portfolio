@@ -14,14 +14,22 @@
         <h1 class="display-2">
           <span class="display-2--intro"> Hey! I'm <span style="white-space: nowrap ;">Gde-G</span></span>
           <span class="display-2--description lh-base">
-            This is my portfolio, you will find a showcase of my projects that highlight my abilities in full stack development and cloud technologies.
-            Each project represents a unique challenge that I embraced with enthusiasm and delivered successful outcomes.
+            Welcome to my portfolio, you will find my skills, collection of technologies and recently developed projects.
+            Each project reflects my dedication to creating innovative web solutions, leveraging a wide range of technologies and frameworks.
+            I invite you to explore it and if you have any questions, feel free to contact me.
           </span>
         </h1>
         <div class="d-sm-flex justify-content-around">
-          <a href="#contact" class="rounded-pill btn-rounded cv-btn">
-            My CV
-            <span><i class="fas fa-arrow-right"></i></span>
+          <a href="https://www.linkedin.com/in/gast%C3%B3n-de-guernica-7283b9227/"
+            target="_blank" referrerpolicy="no-referrer" class="sm-btn"
+            data-bs-toggle="tooltip" data-bs-placement="bottom"
+            data-bs-title="Open Gde-G LinkedIn profile">
+            <img src="{% static 'images/icons/linkedin.png'%}" alt="LinkedIn Logo" srcset="">
+          </a>
+          <a href="https://github.com/Gde-G" target="_blank" referrerpolicy="no-referrer"
+            class="sm-btn" data-bs-toggle="tooltip" data-bs-placement="bottom"
+            data-bs-title="Open Gde-G Github profile">
+            <img src="{% static 'images/icons/github.png'%}" alt="Github Logo" srcset="">
           </a>
           <button hx-get="{% url 'get-certificates' %}" hx-trigger="click" hx-target="#certificates-modal" hx-swap="innerHTML"
             data-bs-toggle="modal" data-bs-target="#certificates-modal"

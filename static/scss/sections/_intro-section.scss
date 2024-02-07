@@ -11,19 +11,29 @@
 
 .intros{
     padding-bottom: 4rem;
-    .cv-btn, .cert-btn{
+    .cert-btn{
         display: block;
         margin: 0.5rem 0;
+        width: 75%;
         @media (min-width: 576px){
             display: flex;
             width: auto !important;
         }
     }
-    .cv-btn{
-        width: 50%;
-    }
-    .cert-btn{
-        width: 75%;
+    .sm-btn{
+        margin: 0.5rem;
+        img{
+            width: 50px;
+            height: auto;
+            border-radius: 10px;
+            &:hover{
+                background-color: rgba($white,0.75);
+                box-shadow: 0px 0px 14px 0px rgba($white,0.75);
+                -webkit-box-shadow: 0px 0px 14px 0px rgba($white,0.75);
+                -moz-box-shadow: 0px 0px 14px 0px rgba($white,0.75);
+            }
+        }
+        
     }
     .logo-box{
         position: relative;

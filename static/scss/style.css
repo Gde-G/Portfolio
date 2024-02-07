@@ -12127,21 +12127,30 @@ textarea.form-control-lg {
 .intros {
   padding-bottom: 4rem;
 }
-.intros .cv-btn, .intros .cert-btn {
+.intros .cert-btn {
   display: block;
   margin: 0.5rem 0;
+  width: 75%;
 }
 @media (min-width: 576px) {
-  .intros .cv-btn, .intros .cert-btn {
+  .intros .cert-btn {
     display: flex;
     width: auto !important;
   }
 }
-.intros .cv-btn {
-  width: 50%;
+.intros .sm-btn {
+  margin: 0.5rem;
 }
-.intros .cert-btn {
-  width: 75%;
+.intros .sm-btn img {
+  width: 50px;
+  height: auto;
+  border-radius: 10px;
+}
+.intros .sm-btn img:hover {
+  background-color: rgba(255, 255, 255, 0.75);
+  box-shadow: 0px 0px 14px 0px rgba(255, 255, 255, 0.75);
+  -webkit-box-shadow: 0px 0px 14px 0px rgba(255, 255, 255, 0.75);
+  -moz-box-shadow: 0px 0px 14px 0px rgba(255, 255, 255, 0.75);
 }
 .intros .logo-box {
   position: relative;
