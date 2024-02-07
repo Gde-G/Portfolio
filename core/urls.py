@@ -5,9 +5,9 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
 
-    path('#techno/', views.get_technologies, name='get-technologies'),
-    path('#testimonials/', views.get_testimonials, name='get-testimonials'),
-    path('#portfolio', views.get_portfolio, name='get-portfolio'),
+    path('techno/', views.get_technologies, name='get-technologies'),
+    path('testimonials/', views.get_testimonials, name='get-testimonials'),
+    path('portfolio', views.get_portfolio, name='get-portfolio'),
 
     path('testimonial/', views.create_testimonial, name='testimonial-add'),
     path('testimonial/<str:pk>', views.update_testimonial, name='testimonial-edit'),
@@ -22,10 +22,6 @@ urlpatterns = [
     path('add-project/', views.create_project, name='add-project'),
     path('edit-project/<str:pk>', views.update_project, name='edit-project'),
     path('del-project/<str:pk>', views.delete_project, name='del-project'),
-
-
-
-
 ]
 
 htmx_urlpatterns = [
