@@ -154,9 +154,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Email config
 if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # env
 else:
-    EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # env
 
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_PORT = os.environ.get('EMAIL_PORT')
@@ -177,16 +177,17 @@ AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
 AWS_S3_FILE_OVERWRITE = bool(int(os.environ.get('AWS_S3_FILE_OVERWRITE')))
-MEDIA_URL = f'{AWS_S3_CUSTOM_DOMAIN}/media/'
+
 STATIC_URL = f'{AWS_S3_CUSTOM_DOMAIN}/static/'
+MEDIA_URL = f'{AWS_S3_CUSTOM_DOMAIN}/media/'
 
 STORAGES = {
-	#Media files management
-	"default": {
-		"BACKEND": "portfolio.storage_backends.MediaStorage"
-	},
-	# Staticfiles
-	"staticfiles":{
-		"BACKEND": "portfolio.storage_backends.StaticStorage"
-	},
+    #Media files management
+    "default": {
+        "BACKEND": "portfolio.storage_backends.MediaStorage"
+    },
+    # Staticfiles
+    "staticfiles":{
+        "BACKEND": "portfolio.storage_backends.StaticStorage"
+    },
 }
