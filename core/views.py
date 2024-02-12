@@ -12,7 +12,7 @@ from .forms import (
     TechnologyForm, ThirdPartyForm, TestimonialForm,
     CategoryForm, ProjectForm, ConsultForm, CertificateForm
 )
-from .models import Testimonial, Category, Project, Technology, ThirdParty, Certificate
+from .models import Testimonial, Category, Project, ProjectImages, Technology, ThirdParty, Certificate
 import base64
 from django.core.files.base import ContentFile
 from django.core.files.uploadedfile import InMemoryUploadedFile
@@ -297,6 +297,7 @@ def get_projects(request: HttpRequest):
 def get_project(request: HttpRequest, slug):
     project = Project.objects.prefetch_related(
         'category', 'technologies', 'third_parties').get(slug=slug)
+    proj_images = ProjectImages.objects.filter(project=project)
 
     front_tech = project.technologies.filter(type_tech='frontend')
     back_tech = project.technologies.filter(type_tech='backend')
@@ -309,6 +310,7 @@ def get_project(request: HttpRequest, slug):
 
     context = {
         'project': project,
+        'proj_images': proj_images,
         'front_tech': front_tech,
         'back_tech': back_tech,
         'db_tech': db_tech,

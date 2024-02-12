@@ -62,7 +62,7 @@ class Project(models.Model):
         upload_to='images/projects/diagrams', null=True, blank=True)
 
     link = models.URLField(max_length=120)
-
+    github_repo = models.URLField(max_length=200)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, null=True)
     technologies = models.ManyToManyField(
@@ -102,6 +102,13 @@ class ProjectThirdparty(models.Model):
     def __str__(self):
         return self.project.name + ', ' + self.third_party.name
 
+
+class ProjectImages(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='images/projects/sec')
+
+    def __str__(self):
+        return self.project.name
 
 class Consult(models.Model):
     first_name = models.CharField(max_length=50)

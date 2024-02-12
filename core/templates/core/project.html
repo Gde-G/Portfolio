@@ -12,10 +12,15 @@
           </div>
           <h3 class="display-5 text-center">
             {{project.name}} 
-            <a href="{{project.link}}" class="link-light text-center fs-4 " target="_blank" 
+            <a href="{{project.link}}" class="link-light text-center fs-4 text-decoration-none" target="_blank" 
               data-bs-toggle="tooltip" data-bs-placement="top"
               data-bs-custom-class="custom-tooltip" data-bs-title="Open {{project.name}} site">
               <i class="fa-solid fa-link ms-4"></i>
+            </a>
+            <a href="{{project.github_repo}}" class="link-light text-center fs-4 text-decoration-none" target="_blank" 
+              data-bs-toggle="tooltip" data-bs-placement="top"
+              data-bs-custom-class="custom-tooltip" data-bs-title="Open {{project.name}} repo">
+              <img src="{% static 'images/icons/github.png'%}" class="logo-git-hub" style="width: 35px;height: auto;border-radius: 10px;" alt="Github Logo" srcset="">
             </a>
           </h3>
           
@@ -89,10 +94,11 @@
               </div>
             </div>
           </div>
+          {% if api_third %}
           <div class="row text-center project-each-body-third">
             <h3 class="display-2--description ">Third parties software</h3>
             <div class="heading-line"></div>
-            {% if api_third %}
+            
             <div class="col-12 col-sm-4">
               <h3 class="display-2--description fs-5 text-secondary">API'S</h3>
               {% for at in api_third %}
@@ -102,7 +108,6 @@
               </ul>
               {% endfor %}
             </div>
-            {% endif%}
             {% if library_third %}
             <div class="col-12 col-sm-4">
               <h3 class="display-2--description fs-5 text-primary">Libraries</h3>
@@ -126,6 +131,20 @@
             </div>
             {% endif%}
           </div>
+          {% endif%}
+          {% if proj_images %}
+          <div class="row text-center project-each-body-imgs">
+            <h3 class="display-2--description ">Project Snapshots</h3>
+            <div class="heading-line"></div>
+            {% for img in proj_images %}
+            <div class="col-12 col-md-4">
+              <a href="{% get_media_prefix %}{{img.image}}" target="_blank" class="text-decoration-none m-0 p-0">
+                <img src="{% get_media_prefix %}{{img.image}}" class="each-img" alt="{{project.name}} ">
+              </a>
+            </div>
+            {% endfor%}
+          </div>
+          {% endif %}
 
         </div>
       </div>
