@@ -33,14 +33,18 @@
             <div class="col-6 col-md-3">
               <h3 class="display-2--description fs-5 text-primary">Frontend</h3>
               <div class="row text-center">
-                {% for front in front_tech%}
+                {% if front_tech %}
+                  {% for front in front_tech%}
                 <div class="col-4 mx-auto p-0">
                   <div class="project-each-body-techno-each" data-bs-toggle="tooltip" data-bs-placement="top"
                     data-bs-custom-class="custom-tooltip" data-bs-title="{{front.name}}">
                     <img src="{% get_media_prefix %}{{ front.logo }}" alt="{{front.name}} logo" class="img-fluid" />
                   </div>
                 </div>
-                {% endfor %}
+                  {% endfor %}
+                {% else %}
+                <small class="text-danger">Has no frontend define</small>
+                {% endif %}
               </div>              
             </div>
             <div class="col-6 col-md-3">
