@@ -94,11 +94,11 @@
               </div>
             </div>
           </div>
-          {% if api_third %}
+          {% if third_exists %}
           <div class="row text-center project-each-body-third">
             <h3 class="display-2--description ">Third parties software</h3>
             <div class="heading-line"></div>
-            
+            {% if api_third %}
             <div class="col-12 col-sm-4">
               <h3 class="display-2--description fs-5 text-secondary">API'S</h3>
               {% for at in api_third %}
@@ -108,6 +108,7 @@
               </ul>
               {% endfor %}
             </div>
+            {% endif %}
             {% if library_third %}
             <div class="col-12 col-sm-4">
               <h3 class="display-2--description fs-5 text-primary">Libraries</h3>

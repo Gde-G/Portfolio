@@ -308,6 +308,7 @@ def get_project(request: HttpRequest, slug):
     library_third = project.third_parties.filter(kind='Library')
     other_third = project.third_parties.filter(kind='Other')
 
+    third_exists = api_third.exists() or library_third.exists() or other_third.exists()
     context = {
         'project': project,
         'proj_images': proj_images,
@@ -315,6 +316,7 @@ def get_project(request: HttpRequest, slug):
         'back_tech': back_tech,
         'db_tech': db_tech,
         'cloud_tech': cloud_tech,
+        'third_exists':third_exists,
         'api_third': api_third,
         'library_third': library_third,
         'other_third': other_third
