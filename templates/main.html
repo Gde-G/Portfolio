@@ -43,6 +43,8 @@
       event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
     });
   </script>
+  <script src="{% static 'assets/js/btn-loader.js' %}"></script>
+  
   {% block scripts%}
   {% endblock scripts%}
 
